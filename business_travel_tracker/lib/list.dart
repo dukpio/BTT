@@ -12,20 +12,33 @@ class ListofRecords extends StatelessWidget {
       amount: 89.99,
       date: DateTime(2022, 9, 5),
       nameofTransaction: 'Airplane ticket',
-    )
+    ),
+    Record(
+      amount: 30.89,
+      date: DateTime(2022, 9, 6),
+      nameofTransaction: 'Gow',
+    ),
   ];
 
   ListofRecords(records);
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ListTile(
-          title: Text('Taxi to the Airport'),
-        ),
-        ListTile(title: Text('Airplane ticket')),
-      ],
+    return Container(
+      height: 400,
+      child: ListView.builder(
+          itemCount: records.length,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 5,
+              margin: EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 5,
+              ),
+              key: ValueKey(records[index]),
+              child: FittedBox(child: Text(records[index].toString())),
+            );
+          }),
     );
   }
 }

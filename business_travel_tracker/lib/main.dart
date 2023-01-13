@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'chart.dart';
 import 'list.dart';
+import './record.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,19 +13,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Business Travel Tracker',
       theme: ThemeData(
           backgroundColor: Color.fromARGB(255, 195, 231, 228),
           primarySwatch: Colors.blueGrey,
           fontFamily: 'Dolgan',
           appBarTheme: AppBarTheme(centerTitle: true)),
-      home: const MyHomePage(title: 'Business Travel Tracker'),
+      home: MyHomePage(title: 'Business Travel Tracker'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
@@ -33,6 +38,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<Record> records = [
+    Record(
+      amount: 25.99,
+      date: DateTime(2022, 9, 7),
+      nameofTransaction: 'Taxi to the Airport',
+    ),
+    Record(
+      amount: 89.99,
+      date: DateTime(2022, 9, 5),
+      nameofTransaction: 'Airplane ticket',
+    ),
+    Record(
+      amount: 30.89,
+      date: DateTime(2022, 9, 6),
+      nameofTransaction: 'Dinner at the Airport',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,40 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: Card(
-              child: ListView(children: [
-                Container(
-                  height: 50,
-                  color: Theme.of(context).colorScheme.background,
-                  child: const Center(
-                      child: Text(
-                    'Taxi to the Airport',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  )),
-                ),
-                Container(
-                  height: 50,
-                  color: Theme.of(context).colorScheme.background,
-                  child: const Center(
-                      child: Text(
-                    'Airplane ticket',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  )),
-                ),
-                Container(
-                  height: 50,
-                  color: Theme.of(context).colorScheme.background,
-                  child: const Center(
-                    child: Text(
-                      'Dinner at the Airport',
-                      style: TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-          ),
+          ListofRecords(records),
           SizedBox(
             width: 75,
           ),
